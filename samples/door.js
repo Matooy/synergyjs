@@ -1,0 +1,1 @@
+$('.doors').addClass('open');
