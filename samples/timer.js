@@ -2,25 +2,25 @@
 
   var $el = $('#preview-timer-output');
 
-  var timer = new Synergy([1, 2, 3, 5])({
-    value: function(v){
-      return v;
-    }
+  var timer = new Synergy([1, 2, 3, 5, 7])({
+    value: function(v){ return v; }
   },
   {
     step: [
       function(attr, pos, rate){
-        console.log(attr, pos, rate);
-        $el.html('One: ' + pos);
+        $el.html('One: ' + attr.value);
       },
-      function(){
-        $el.html('Two?');
+      function(attr){
+        $el.html('Two?' + attr.value);
       },
-      function(){
-        $el.html('Three...');
+      function(attr){
+        $el.html('Three...' + attr.value);
       },
-      function(){
+      function(attr){
         $el.html('Five!!!');
+      },
+      function(){
+        $el.html('Nothing to say anymore.');
       }
     ]
   });

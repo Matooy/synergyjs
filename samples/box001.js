@@ -1,24 +1,27 @@
-var box001 = $('#box001');
+var box001   = $('#box001');
+var timeline = [280, 380, 480, 620, 680];
+var timer    = null;
 
-var anim001 = new Synergy([280, 380, 480, 620, 680], {
-  'width'  : function(i){ return (i/2) + 'px'; },
-  'height' : [40, true, function(i){ return (i/4); }, null, 0, 'px']
+
+var synergy001 = new Synergy(timeline, {
+  'width'  :   function(i){ return (i/6.8) + '%'; },
+  'height' :   [40, true, function(i){ return (i/4); }, null, 0, 'px'],
+  'transform': [0, true, function(i){ return i/2.4; }, null, 0]
 })({
-
   step: function(attr, i){
+    if(attr.transform)
+      attr.transform = 'rotate(' + attr.transform + 'deg)';
     box001.css(attr);
   }
-
 }).init();
 
-var timer = null;
+
 $('#run001').on('click', function(){
-  if(timer)
-    clearInterval(timer);
+  (timer) && clearInterval(timer);
+
   var i = 200;
   timer = setInterval(function(){
-    anim001.observe(i);
-    (i>680) && clearInterval(timer);
-    i++;
+    synergy001.observe(i);
+    (i>timeline[timeline.length - 1]) && clearInterval(timer); i++;
   });
 });

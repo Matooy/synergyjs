@@ -7,25 +7,7 @@
 <script type="text/javascript" src="https://rawgit.com/Matooy/codesnapjs/master/src/codesnap.js"></script>
 
 <link rel="stylesheet" href="./asset/css/style.css">
-
-
 <link rel="stylesheet" href="./asset/extra/prism/prism.css">
-
-<style>
-body {}
-pre {
-  font-size: 10px !important;
-
-}
-h1 {
-  font-size: 2.8em;
-}
-.preview-title {
-  font-size: 1.8em;
-  margin-top: 4em;
-  margin-bottom: 1em;
-}
-</style>
 
 </head>
 <body>
@@ -35,49 +17,41 @@ h1 {
   <div id="content">
     <h1>Synergy JS</h1>
     <div>
-      SynergyJS is a library that makes relations to some value.
+      I feel synergy about that.
     </div>
 
-    <div class="code-sample" id="preview-first"></div>
+    <div class="code-sample" id="preview-first" style="position: relative;"></div>
+
     <div class="code-sample" id="preview-callback"></div>
-
-    <h3>Available callbacks and Step by step hooks.</h3>
-
-    <p>
-    In style parameters,<br>
-    <dl>
-
-      <dt>null</dt>
-      <dd>Keep previous value till next step.</dd>
-
-      <dt>true</dt>
-      <dd>Find next value and adjust automatically.</dd>
-
-      <dt>callback</dt>
-      <dd>Take position-y value as parameter.</dd>
-
-      <dt>callback in array</dt>
-      <dd>Take position-y value as parameter.</dd>
-
-    </dl>
-    </p>
-
-    <pre class="code-sample" id="preview-box001"></pre>
-    <div style="height:140px;">
-      <div id="box001" class="box"></div>
+    <div class="sample" id="preview-callback-sample">
+      <button id="preview-callback-sample-add-button">+</button>
+      <button id="preview-callback-sample-minus-button">-</button>
+      <div id="preview-callback-sample-event">&nbsp;</div>
+      <div id="preview-callback-sample-value">&nbsp;</div>
     </div>
-    <button id="run001">Run</button>
+
+    <div class="code-sample" id="preview-box001"></div>
+    <div class="sample">
+      <div style="display: table; width: 100%; margin: 0;">
+        <div style="height:140px; width: 100%; text-align: center; vertical-align: middle; display: table-cell;">
+          <div id="box001" class="box" style="margin: auto;"></div>
+        </div>
+      </div>
+      <button id="run001" class="button">Run</button>
+    </div>
 
 
     <div class="code-sample" id="preview-box002"></div>
-    <div>
-      <div id="box002" class="box"></div>
+    <div class="sample">
+      <div><div id="box002" class="box"></div></div>
+      <button id="run002">Run</button>
     </div>
-    <button id="run002">Run</button>
 
     <div class="code-sample" id="preview-timer"></div>
-    <div id="preview-timer-output"></div>
-    <button id="run-timer">Run</button>
+    <div class="sample">
+      <div id="preview-timer-output">&nbsp;</div>
+      <button id="run-timer">Run</button>
+    </div>
 
   </div>
 </div>
@@ -94,19 +68,33 @@ $(function(){
       files: [
         ["first", {
           title: "First sample",
-          description: "Basic usage with jQuery.css() method."
+          description: "Basic usage with scroll event and jQuery.css() method."
         }],
         ["timer", {
-          title: "Timer",
+          title: "Key frame specific actions.",
           description: "Oberve specific value with 'step' callbacks."
         }],
         ["callback", {
           title: "Callbacks",
-          description: 'Variety of callbacks.'
+          description: '<p>Variety of callbacks.<br>Available callbacks and Step by step hooks.</p>'
         }],
-        ["box001"],
+        ["box001", {
+          title: "Manipulating complex values.",
+          description:
+              '<dl>'
+              + '<dt>null</dt>'
+                + '<dd>Keep previous value till next step.</dd>'
+              + '<dt>true</dt>'
+                + '<dd>Find next value and adjust automatically.</dd>'
+              + '<dt>callback</dt>'
+                + '<dd>Take the timeline value as parameter.</dd>'
+              + '<dt>callback in array</dt>'
+                + '<dd>Take the timeline value as parameter.</dd>'
+            + '</dl>'
+        }],
         ["box002", {
-          title: "Apply multiple actions."
+          title: "Apply multiple actions.",
+          description: "You can make multiple synergy actions from one SynergyJS instance."
         }],
       ],
       loaded: function(f, src){

@@ -9,7 +9,7 @@
   // }
   //
   // op = {
-  //  debug              : false,
+  //  debug     : false,
   //  start_out : null,
   //  start_in  : null,
   //  end_out   : null,
@@ -17,9 +17,7 @@
   //  cross     : null,
   // }
 
-  ;
-
-  root["Synergy"] = def;
+  root['Synergy'] = def;
 
 })(this, function(/*
   Array timeline,
@@ -143,14 +141,6 @@
 
 
     var // Var difinition.
-
-      // Callback related
-      ch_callback_start_out = is_f(Op.start_in) || false,
-      ch_callback_start_in  = is_f(Op.start_out) || false,
-      ch_callback_end_out   = is_f(Op.end_out) || false,
-      ch_callback_end_in    = is_f(Op.end_in) || false,
-      ch_callback_cross     = is_f(Op.cross) || false,
-
       attribute_edges = (function(set){
         var self = this;
         self.from = {};
@@ -186,9 +176,8 @@
 
         var unit   = component[1];
         var values = component[0];
-
-        var prev = null;
-        var next = null;
+        var prev   = null;
+        var next   = null;
 
         each(values, function(value, k){
 
@@ -329,25 +318,26 @@
           to = to(pos, rate);
         }
 
-        f_i = parseInt(from);
-        t_i = parseInt(to);
-
-        //f_i = isNaN(f_i) ? pos : f_i;
-        //t_i = isNaN(t_i) ? pos : t_i;
-
-        if(f_i || t_i){
-          if(f_i < t_i){
-            value = ( f_i + ( (t_i - f_i)*rate ) ) + addu;
-          }else if(f_i > t_i){
-            value = ( f_i - ( (f_i - t_i)*rate ) ) + addu;
-          }else{
-            value = f_i + addu;
-          }
+        if( typeof to == 'string' ){
+          value = to;
         }else{
-          if(rate === 0){
-            value = f_i;
-          }else if(rate===1){
-            value = t_i;
+          f_i = parseInt(from);
+          t_i = parseInt(to);
+
+          if(f_i || t_i){
+            if(f_i < t_i){
+              value = ( f_i + ( (t_i - f_i)*rate ) ) + addu;
+            }else if(f_i > t_i){
+              value = ( f_i - ( (f_i - t_i)*rate ) ) + addu;
+            }else{
+              value = f_i + addu;
+            }
+          }else{
+            if(rate === 0){
+              value = f_i;
+            }else if(rate===1){
+              value = t_i;
+            }
           }
         }
 
@@ -491,7 +481,16 @@
     function main(value){
       recalc(value);
 
-      var rate  = (( value - St.border )/( St.dest - St.border ));
+      var p = ( value - St.border );
+      var c = ( St.dest - St.border );
+      var rate = 0;
+      if(!p){
+        rate = 0;
+      }else if(!c){
+        rate = 1;
+      }else{
+        rate  = (p/c);
+      }
       if(rate <= 0 ){
         St.rate = 0;
         St.overflow = true;

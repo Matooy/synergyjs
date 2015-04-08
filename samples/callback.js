@@ -3,21 +3,19 @@
   var observer = new Synergy([3,6,9], {});
 
   var val = 0;
-  var add = $("<button>+</button>");
-  var red = $("<button>-</button>");
 
-  var prv_clb = $('<div id="preview-callback-event">');
-  var prv_val = $('<div id="preview-callback-value">');
+  var UI_add     = $('#preview-callback-sample-add-button');
+  var UI_red     = $('#preview-callback-sample-minus-button');
+  var UI_prv_clb = $('#preview-callback-sample-event');
+  var UI_prv_val = $('#preview-callback-sample-value');
 
-  $('#preview-callback').append(add);
-  $('#preview-callback').append(red);
-  $('#preview-callback').append(prv_clb);
-  $('#preview-callback').append(prv_val);
 
   function update(txt){
-    var def = prv_clb.text();
-    prv_clb.text((txt ? (def?def+', ':'') + txt: ''));
-    prv_val.text(val);
+    var def = UI_prv_clb.text();
+    var txt = (txt ? (def ? def+', ' : '') + txt: '');
+    UI_prv_clb.text(txt);
+    UI_prv_val.text(val);
+    $('#preview-callback-pre').css('transform', 'rotate('+(val*2)+'deg)');
   }
 
 
@@ -38,12 +36,14 @@
   (function(){
     update();
 
-    add.on('click', function(){
+    UI_add.on('click', function(){
+      if(val + 1 > 10) return;
       val++; update();
       action.observe(val);
     });
 
-    red.on('click', function(){
+    UI_red.on('click', function(){
+      if(val - 1 < 0) return;
       val--; update();
       action.observe(val);
     });
