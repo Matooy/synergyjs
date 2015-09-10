@@ -4,7 +4,7 @@ var timer    = null;
 
 
 var synergy001 = new Synergy(timeline, {
-  'width'  :   function(i){ return (i/6.8) + '%'; },
+  'width'  :   function(i){ var a = (-2 * Math.pow(i/134, 2) + 100) + "%"; console.log(i, a); return a; },
   'height' :   [40, true, function(i){ return (i/4); }, null, 0, 'px'],
   'transform': [0, true, function(i){ return i/2.4; }, null, 0]
 })({

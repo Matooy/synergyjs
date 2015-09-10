@@ -17,7 +17,7 @@
   <div id="content">
     <h1>Synergy JS</h1>
     <div>
-      I feel synergy about that.
+      I feel the synergy about that.
     </div>
 
     <div class="code-sample" id="preview-first" style="position: relative;"></div>
@@ -97,8 +97,10 @@ $(function(){
           description: "You can make multiple synergy actions from one SynergyJS instance."
         }],
       ],
-      loaded: function(f, src){
-        Prism.highlightElement(document.getElementById('preview-' +f[0]+ '-code'));
+      events: {
+        loaded: function(f, src){
+          Prism.highlightElement(document.getElementById('preview-' +f[0]+ '-code'));
+        }
       }
     })).load();
 

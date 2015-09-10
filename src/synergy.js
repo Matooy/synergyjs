@@ -416,7 +416,6 @@
 
     function calculate(run){
 
-      var bef = St.paused;
       toggle_pause();
 
       var st = frame_sync(St.position, St.attributes, St.rate, St.step);
@@ -424,7 +423,7 @@
 
       (Op.debug) && console.log(st);
 
-      if( ! St.paused || (bef === false && St.paused === true)){
+      if( ! St.paused || (St.paused === false && St.paused === true)){
         call_step(arg);
         is_f(run) && call(run, arg);
         call_next_callable(arg);
